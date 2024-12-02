@@ -2,7 +2,7 @@
 import connectMongo from "@/lib/mongodb";
 
 export default function handler(req, res) {
-  connectMongo();
-  if (connectMongo) console.log("Connected to MongoDB");
+  // connectMongo();
+  // if (connectMongo) console.log("Connected to MongoDB");
   res.status(200).json({ name: "John Doe" });
 }

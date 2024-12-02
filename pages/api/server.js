@@ -2,9 +2,13 @@ import nc from "next-connect";
 import cors from "cors";
 import mongoose from "mongoose";
 
+const corsOptions = {
+  origin: "*",
+};
+
 // Middleware to handle CORS
 const handler = nc();
-handler.use(cors({ origin: "*" }));
+handler.use(cors(corsOptions));
 
 // MongoDB connection
 const connectToDatabase = async () => {

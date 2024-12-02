@@ -1,23 +1,22 @@
 import nc from "next-connect";
-import cors from "cors";
 import mongoose from "mongoose";
 
-const corsOptions = {
-  origin: "*",
-};
-
-// Middleware to handle CORS
+// Middleware to handle requests
 const handler = nc();
-handler.use(cors(corsOptions));
 
 // MongoDB connection
 const connectToDatabase = async () => {
   if (mongoose.connection.readyState === 0) {
-    await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log("Connected to MongoDB");
+    try {
+      await mongoose.connect(process.env.MONGO_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      });
+      console.log("Connected to MongoDB");
+    } catch (error) {
+      console.error("MongoDB connection error:", error);
+      throw new Error("Could not connect to MongoDB");
+    }
   }
 };
 
